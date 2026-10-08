@@ -29,8 +29,9 @@ The reviewer must determine:
 6. which behavior moved and which behavior changed;
 7. which names hide a caller-relevant fact or responsibility, require absent
    context, retain an old concept at use sites, or leave the entity/boundary
-   dependent on a producer/consumer/source viewpoint;
-8. whether collection names distinguish payload from metadata/control events,
+   dependent on a context-specific abstract role instead of an identifiable
+   entity, fact, or owned responsibility;
+8. whether collection names distinguish content from descriptive records/control events,
    state labels remain true after every writer, and operation/test names expose
    their actual policy, side effect or observed completion boundary;
 9. which decisions appear unsupported, ambiguous, or misplaced; and

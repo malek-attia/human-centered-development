@@ -28,7 +28,7 @@ callers or stored state. Report it briefly at handoff.
 ### Evidence-dependent
 
 Inspect documentation, source, or executable behavior before deciding. This
-includes assumptions about execution engines, callbacks, retries, ordering,
+includes assumptions about libraries, frameworks, callbacks, retries, ordering,
 serialization, and lifecycle. Record the evidence and distinguish observation
 from inference.
 
@@ -43,7 +43,7 @@ normally includes:
 - failure, retry, recovery, or cleanup semantics;
 - correctness-versus-performance tradeoffs;
 - safety fallbacks;
-- user-payload handling;
+- handling or interpretation of user content;
 - new domain vocabulary; and
 - behavior that expands the requested scope.
 
@@ -59,8 +59,8 @@ implementation details.
   audit, review-sized implementation boundaries, cold-read audit, and integration
   validation.
 
-Protocol, recovery, concurrency, lifecycle, central-manager, data-opacity, and
-private-engine patch changes are sensitive by default.
+Public contracts, recovery, concurrency, state lifecycle, interpretation of user
+content, and patches to third-party internals are sensitive by default.
 
 ## Apply the authority order
 

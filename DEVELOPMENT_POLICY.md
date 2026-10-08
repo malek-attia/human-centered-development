@@ -18,9 +18,10 @@ edit does not require the full workflow.
   owner, lifecycle, invariant, and callers of important state.
 - Choose the smallest representation that preserves the actual contract.
   Neither extra abstractions nor fewer classes are automatically simpler.
-- Name the concrete entity, fact, or responsibility. Do not make the reader
-  infer it from relative roles such as producer, consumer, or source. Preserve
-  established external API terms where they are accurate.
+- Name the concrete entity, fact, or owned responsibility rather than an abstract
+  role whose meaning depends on context. Do not make the reader infer what a name
+  refers to from the surrounding architecture or a previous conversation.
+  Preserve established domain and API terms when they are unambiguous.
 - Keep adapters and callbacks thin. Give independently changing responsibilities
   cohesive owners instead of accumulating them in a central manager.
 - Verify assumptions about third-party behavior. Return material ownership,

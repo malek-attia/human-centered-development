@@ -28,7 +28,7 @@ record:
 | What invariant does it protect? | Conditions that must always hold |
 | What starts and ends its lifecycle? | Creation, transition, and cleanup |
 | What calls it? | Entry points and integration boundaries |
-| What does it affect? | State mutation, RPC, files, or engine behavior |
+| What does it affect? | State mutation, external calls, files, or framework behavior |
 | Why does it change? | The business or infrastructure reason |
 
 A responsibility probably deserves its own component when it has an independent
@@ -63,7 +63,7 @@ requirement:
 - A class is useful when behavior, invariants, or lifecycle have a cohesive owner.
 
 For retained fields, returned values, options, and extension points, identify
-their actual consumers. Derive stable values rather than storing another
+their actual callers and readers. Derive stable values rather than storing another
 authoritative copy. Keep snapshots, caches, and repeated state when different
 lifetimes or consistency requirements justify them. When adapting metadata,
 prefer carrying an existing record over redeclaring its schema, if the boundary
@@ -96,39 +96,40 @@ consequences:
   conditional eligibility check is not merely a historical lookup; reporting
   a failure to another component is not merely failing a local object.
 
-Distinguish payload, metadata and transport in collection names. A queue of
-payload/control events, records of acceptance progress, retry instructions and
-buffered user rows are different facts, even when all concern the same batches.
+Distinguish actual content, descriptive records, and control events in collection
+names. Queued requests, status records, retry instructions, and buffered file
+contents are different facts, even when they concern the same operation.
 Trace shared references and every writer before assigning a state label: a set
 seeded with completed IDs may later also contain newly received IDs. Name its
 actual membership, not only its initial contents or intended eventual state.
 Test and diagnostic names must identify the exact observed boundary and identity;
-storage acknowledgement, pipeline consumption and task completion are not
-interchangeable, nor are logical slots and physical attempts.
+receiving a request, saving its contents, and completing its processing are not
+interchangeable, nor are a logical operation and an individual execution attempt.
 
 Use these as decision criteria, not a mandatory naming template. A reviewer
 should understand why the abstraction exists from its declaration and use site
 without the implementation history. A naming defect does not by itself prove
 the abstraction is unnecessary; evaluate its contract separately.
 
-Avoid ambiguous words such as
-`source`, `output`, `data`, `group`, or `replay` unless the surrounding contract
-makes their exact meaning obvious.
+Do not name something only for an abstract role when that role leaves its identity
+unclear or changes with the observer's context. Prefer the concrete entity, fact,
+or owned responsibility. For example, `password_reset_handler` tells a caller
+which operation is handled; `handler` alone may require tracing unrelated code.
+A maintainer should not have to infer the entity from its directory, surrounding
+architecture, or previous design discussion.
 
-In multi-stage systems, `producer`, `consumer`, and `source` are relative roles:
-one stage can hold each role depending on the observer. Prefer the actual entity and
-boundary, such as `upload_request_id`, `postgres_connection_factory`, or
-`csv_import_chunks`. A reader should not have to infer the entity from
-the directory, execution stage, or previous design discussion. Preserve actual
-engine/protocol names and unambiguous technical uses such as graph sources;
-this is not a blanket ban on those words.
+This is not a blacklist of words or a demand for longer names. Established domain,
+framework, and API terms can express precise roles; retain them when their meaning
+is clear to callers. Short local names are also appropriate when their context is
+already explicit. Naming the entity does not replace explaining the responsibility
+that justifies an abstraction.
 
 Name a monkey-patch module against the external class, module, or function it
 actually patches. Do not imply that an application-owned component needs
 patching. Check the assignment target, including aliases, before choosing the
-name; a purpose label alone can obscure which engine hook is being replaced.
+name; a purpose label alone can obscure which external hook is being replaced.
 
-At public boundaries, name the full contract, such as `import_partition_id`. Shorter
+At public boundaries, name the full contract, such as `document_id`. Shorter
 local names are acceptable only after the context is established. Avoid suffixes
 that repeat information already obvious from local types and access patterns.
 

@@ -34,10 +34,11 @@ Read only the references relevant to the current task.
 - Representations are no more elaborate than their actual contracts require.
 - Names express the facts, responsibilities, and boundary roles callers need
   to understand, consistently in declarations and use sites.
-- Name concrete entities at system boundaries; avoid relative roles that
-  change with the observer's viewpoint (`producer`, `consumer`, `source`).
-  Patch names identify the external target; established engine/API terms remain.
-- Engine patches, adapters, callbacks, and RPC boundaries remain thin.
+- Name concrete entities, facts, and owned responsibilities rather than abstract
+  roles whose meaning changes with context. Preserve established domain and API
+  terms when they identify the concept unambiguously.
+- Patch names identify the external target. Patches, adapters, callbacks, and
+  external-interface boundaries remain thin.
 - Distinct responsibilities have cohesive owners rather than accumulating in a
   central manager.
 - The main success and failure paths are traceable without conversation history.

@@ -31,12 +31,13 @@ A developer should be able to:
 
 ## Organize by purpose
 
-Keep categories semantically distinct:
+Keep test purposes semantically distinct where relevant to the project; these
+are examples, not a prescribed directory layout:
 
 - **Unit:** one state machine, transformation, or algorithm.
 - **Correctness:** public behavior through the real component surface.
 - **Component fault tolerance:** failures in project-owned components.
-- **Engine contracts:** verified assumptions about third-party execution.
+- **Third-party contracts:** verified assumptions about library or framework behavior.
 - **End to end:** cross-component production-like scenarios.
 - **Experiments:** temporary investigations and proofs, not guarantees.
 

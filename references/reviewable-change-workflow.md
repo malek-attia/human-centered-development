@@ -52,7 +52,7 @@ the necessary refactor, but isolate it and explain the reason.
 An adapter, monkey patch, callback, or protocol boundary should normally:
 
 1. intercept or receive the event;
-2. obtain engine- or protocol-owned information;
+2. obtain information owned by the external API, framework, or protocol;
 3. translate it into explicit project-domain arguments;
 4. call the component that owns the operation; and
 5. preserve the original external behavior.
