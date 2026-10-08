@@ -1,0 +1,6 @@
+interface:
+  display_name: "Human-Centered Development"
+  short_description: "Keep code understandable and reviewable by humans"
+  default_prompt: "Use $human-centered-development to make this change easy for humans to trace, review, and maintain."
+policy:
+  allow_implicit_invocation: true
