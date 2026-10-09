@@ -34,16 +34,20 @@ The reviewer must determine:
 8. whether collection names distinguish content from descriptive records/control events,
    state labels remain true after every writer, and operation/test names expose
    their actual policy, side effect or observed completion boundary;
-9. which decisions appear unsupported, ambiguous, or misplaced; and
+9. which decisions appear unsupported, ambiguous, or misplaced;
 10. whether suspicious abstractions have a simpler equivalent, or which concrete
-   invariant requires their complexity.
+   invariant requires their complexity; and
+11. what repeated collection operations mean in domain terms, their cumulative
+   cost as state grows, and how retained incremental state is updated and reset.
 
 The reviewer should cite concrete files and paths through the code. A generic
 style assessment is not useful.
+If these facts require an author explanation, record a clarity defect rather
+than accepting a renamed helper or comment as proof that the code is clear.
 
 ## Use a strict finding threshold
 
-Report only findings that affect correctness, ownership, traceability,
+Report only findings that affect correctness, workload cost, ownership, traceability,
 debuggability, reviewability, or safe future modification. Separate:
 
 - **Blocker:** the behavior or ownership cannot be determined safely.

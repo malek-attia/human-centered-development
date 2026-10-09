@@ -53,3 +53,15 @@ scenario's meaningful actions in the test body.
 
 Before finishing, ask whether a teammate could diagnose a failed run without the
 test author's help. If not, simplify the harness or improve the visible evidence.
+
+## Verify demonstrated complexity regressions
+
+When correcting a demonstrated complexity defect, use deterministic evidence
+where practical: count relevant operations or reject unnecessary historical
+scans. Exercise lifecycle cases that could invalidate the correction, such as
+duplicate operations, reset, and retry. Explain what work the assertion bounds;
+do not merely assert that a new field or helper exists.
+
+Avoid fragile timing thresholds when operation counts prove the regression.
+This does not require a benchmark suite for every change or prohibit legitimate
+scans and sorts whose frequency and workload justify them.

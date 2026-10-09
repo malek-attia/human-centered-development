@@ -32,6 +32,8 @@ Read only the references relevant to the current task.
 
 - A developer can identify the owner and lifecycle of each important state.
 - Representations are no more elaborate than their actual contracts require.
+- Repeated operations expose their domain meaning and cumulative cost as state
+  grows; retained incremental state has an explicit owner and lifecycle.
 - Names express the facts, responsibilities, and boundary roles callers need
   to understand, consistently in declarations and use sites.
 - Name concrete entities, facts, and owned responsibilities rather than abstract

@@ -81,6 +81,30 @@ anonymous tuples, collapse distinct failure policies, or remove atomicity and
 concurrency safeguards merely to shorten code. A proposed simplification must
 preserve the invariant that justified the original representation.
 
+## Audit repeated operations and their representation
+
+For operations repeated as state grows, identify what grows, how often the
+operation runs, and its total workload. Include scans, sorting, temporary
+allocations, and remote calls where relevant. A linear scan on every insertion
+can make the full sequence quadratic even when each call looks simple.
+
+Choose a representation that makes the domain operation recognizable. Restoring
+recorded order should read as restoring recorded order, not require the reader
+to infer the contract from a filter-sort-projection chain. Adding a helper or
+comment around opaque logic is not sufficient if the representation itself
+remains unnecessarily difficult.
+
+For intrinsically incremental facts, such as the next sequence number, consider
+maintaining the value directly. Identify its owner and the invariants for
+initialization, duplicate operations, reset, retry, deletion, restoration, and
+concurrent access, where applicable. Do not substitute collection length for a
+sequence allocator unless their lifecycles actually guarantee equivalence.
+
+This is not a mandate to cache values or eliminate scans and sorts. Occasional
+reconstruction can be clearer and safer than another authoritative collection.
+Compare cumulative cost and synchronization obligations; retain only the state
+whose benefit justifies its lifecycle complexity.
+
 ## Audit names
 
 First identify what a value or component represents to its callers. Name that
